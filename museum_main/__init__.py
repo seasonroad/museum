@@ -6,4 +6,4 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
-from museum_main import views, models
+from museum_main import views

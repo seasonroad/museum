@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_village') }}" method=post class=add-village>
+      <dl>
+        <dt>Village Name
+        <dd><input type=text size=30 name=village_name>
+        <dt>Describe:
+        <dd><textarea name=village_text rows=5 cols=40></textarea>
+        <dd><input type=submit value=Add>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=village>
+  {% for village_i in villages %}
+    <li>
+        <div><h2>{{ village_i.name_cn }}</h2>{{ village_i.desc|safe }}<div/>
+        <div>
+            <a title="Upload">Hell</a>
+            <i>|</i>
+            <a title="Edit">Edit</a>
+        </div>
+    </li>
+  {% else %}
+    <li><em>Unbelievable. No villages here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

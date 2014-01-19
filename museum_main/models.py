@@ -1,7 +1,7 @@
 from museum_main import db
 
 class User(db.Model):
-    pass
+    id = db.Column(db.Integer, primary_key = True)
 
 
 class Country(db.Model):
