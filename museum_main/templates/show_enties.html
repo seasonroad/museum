@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
+
+
   {% if session.logged_in %}
     <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
       <dl>
@@ -11,6 +13,7 @@
       </dl>
     </form>
   {% endif %}
+
   <ul class=entries>
   {% for entry in entries %}
     <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
