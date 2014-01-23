@@ -34,6 +34,28 @@ def add_village():
     return redirect(url_for('show_villages'))
 
 
+@app.route('/jxgd/what')
+def what():
+    a={"files": [
+  {
+    "name": "picture1.jpg",
+    "size": 902604,
+    "url": "http:\/\/example.org\/files\/picture1.jpg",
+    "thumbnailUrl": "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
+    "deleteUrl": "http:\/\/example.org\/files\/picture1.jpg",
+    "deleteType": "DELETE"
+  },
+  {
+    "name": "picture2.jpg",
+    "size": 841946,
+    "url": "http:\/\/example.org\/files\/picture2.jpg",
+    "thumbnailUrl": "http:\/\/example.org\/files\/thumbnail\/picture2.jpg",
+    "deleteUrl": "http:\/\/example.org\/files\/picture2.jpg",
+    "deleteType": "DELETE"
+  }
+]}
+    return a
+
 #----------------------------------------------------#
 #     login / logout management                      #
 #----------------------------------------------------#
