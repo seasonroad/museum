@@ -1,9 +1,12 @@
+import json
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
+from werkzeug import secure_filename
 from museum_main import app, db
 from museum_main.models_building import *
 from museum_main.models_imgs import *
 from museum_main.models import *
+
 
 
 @app.route('/')
@@ -34,8 +37,19 @@ def add_village():
     return redirect(url_for('show_villages'))
 
 
-@app.route('/jxgd/what')
+@app.route('/jxgd/upload_list', methods=['POST', 'GET'])
 def what():
+    print request
+    if request.method == 'POST':
+        img_f = request.files[u'files[]']
+        print request.form
+        print request.files.keys()
+        if img_f:
+            filename = secure_filename(img_f.filename)
+            print filename
+
+    if request.method == 'GET':
+        return json.dumps('')
     a={"files": [
   {
     "name": "picture1.jpg",
@@ -54,7 +68,7 @@ def what():
     "deleteType": "DELETE"
   }
 ]}
-    return a
+    return json.dumps(a)
 
 #----------------------------------------------------#
 #     login / logout management                      #

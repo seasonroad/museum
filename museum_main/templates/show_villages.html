@@ -101,6 +101,8 @@
         <td>
             <span class="preview"></span>
         </td>
+        <td class="title"><label>Title: <input name="title[]" required></label></td>
+        <td class="title"><label>Locate: <input name="locate[]" required></label></td>
         <td>
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>
@@ -127,7 +129,7 @@
 {% } %}
 </script>
 <!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
+    <script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
         <td>

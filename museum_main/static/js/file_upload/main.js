@@ -17,7 +17,7 @@ $(function () {
         disableImageResize: false,
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/jxgd/what'
+        url: '/jxgd/upload_list'
     });
 
     // Enable iframe cross-domain access via redirect option:
@@ -29,6 +29,15 @@ $(function () {
             '/cors/result.html?%s'
         )
     );
+
+    $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+    var inputs = data.context.find(':input');
+
+    if (inputs.filter('[required][value=""]').first().focus().length) {
+        return false;
+    }
+    data.formData = inputs.serializeArray();
+    });
 
     if (window.location.hostname === 'blueimp.github.io') {
         // Demo settings:
@@ -61,6 +70,7 @@ $(function () {
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
             url: $('#fileupload').fileupload('option', 'url'),
+            //url: '/jxgd/upload_list',
             dataType: 'json',
             context: $('#fileupload')[0]
         }).always(function () {
