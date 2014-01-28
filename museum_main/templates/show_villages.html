@@ -18,19 +18,35 @@
         <h1>Hello, world!</h1>
         <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
       </div>
+      <div class="row">
+      {% for village_i in villages %}
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <img src="..." alt="..." class="img-rounded" style="width: 140px; height: 140px;">
+          <h2>{{ village_i.id }} {{ village_i.name_cn }}</h2>
+          <p style="height: 7em; overflow-y: hidden">{{ village_i.desc|safe }}</p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+      {% else %}
+        <p>Unbelievable. No villages here so far</p>
+      {% endfor %}
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+            <a href="#" class="list-group-item">Link</a>
+          </div>
     </div>
   </div>
 
-  <div class="row">
-  {% for village_i in villages %}
-    <div class="col-xs-4 col-sm-4 col-md-4">
-      <h2>{{ village_i.name_cn }}</h2>
-      <p>{{ village_i.desc|safe }}</p>
-    </div>
-  {% else %}
-    <p>Unbelievable. No villages here so far</p>
-  {% endfor %}
-  </div>
   <hr>
 
   {% if session.logged_in %}
@@ -101,8 +117,8 @@
         <td>
             <span class="preview"></span>
         </td>
-        <td class="title"><label>Title: <input name="title[]" required></label></td>
-        <td class="title"><label>Locate: <input name="locate[]" required></label></td>
+        <td class="title"><label>ID: <input name="village_id" required></label></td>
+        <td class="title"><label>Locate: <input name="locate" required></label></td>
         <td>
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>

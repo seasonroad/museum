@@ -5,6 +5,7 @@ class Village(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name_cn = db.Column(db.String(128))
     desc = db.Column(db.Text)
+    cover_pic = db.Column(db.Integer)
 
     def __init__(self, name, desc):
         self.name_cn = name

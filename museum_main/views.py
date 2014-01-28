@@ -2,10 +2,14 @@ import json
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from werkzeug import secure_filename
+import time
+import os
+import PIL
 from museum_main import app, db
 from museum_main.models_building import *
 from museum_main.models_imgs import *
 from museum_main.models import *
+from museum_main.serialize import serialize
 
 
 
@@ -18,6 +22,7 @@ def hello_world():
 def show_villages():
     villages = Village.query.all()
     return render_template('show_villages.html', villages=villages)
+
 
 
 @app.route('/jxgd/add_village', methods=['POST'])
@@ -41,34 +46,38 @@ def add_village():
 def what():
     print request
     if request.method == 'POST':
-        img_f = request.files[u'files[]']
-        print request.form
-        print request.files.keys()
-        if img_f:
-            filename = secure_filename(img_f.filename)
-            print filename
+        req_f = request.files[u'files[]']
+        villiage_id = int(request.form[u'village_id'])
+        if req_f:
+            filename = secure_filename(req_f.filename)
+            suffix = os.path.splitext(filename)[-1]
+            filename = str(int(time.time()*10000))+suffix
+            file_path_ori = os.path.join(app.config['PIC_DIR'], filename)
+            file_path_thumb = os.path.join(app.config['PIC_THUMB_DIR'], filename)
+            # Add to DB
+            new_image = BuildingImg(filename, '', file_path_ori, file_path_thumb)
+            new_image.save(req_f)
+            new_image.save_thumb()
+            if villiage_id:
+                new_image.village_id = villiage_id
+            db.session.add(new_image)
+            db.session.flush()
+
+            files = serialize(new_image)
+            r = {'files':[files]}
+            print r
+            return json.dumps(r)
+        else:
+            pass
 
     if request.method == 'GET':
         return json.dumps('')
-    a={"files": [
-  {
-    "name": "picture1.jpg",
-    "size": 902604,
-    "url": "http:\/\/example.org\/files\/picture1.jpg",
-    "thumbnailUrl": "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
-    "deleteUrl": "http:\/\/example.org\/files\/picture1.jpg",
-    "deleteType": "DELETE"
-  },
-  {
-    "name": "picture2.jpg",
-    "size": 841946,
-    "url": "http:\/\/example.org\/files\/picture2.jpg",
-    "thumbnailUrl": "http:\/\/example.org\/files\/thumbnail\/picture2.jpg",
-    "deleteUrl": "http:\/\/example.org\/files\/picture2.jpg",
-    "deleteType": "DELETE"
-  }
-]}
-    return json.dumps(a)
+
+
+@app.route('/jxgd/delete/pic', methods=['POST', 'GET'])
+def picture_delete():
+    pass
+
 
 #----------------------------------------------------#
 #     login / logout management                      #
