@@ -21,7 +21,7 @@
       <div class="row">
       {% for village_i in villages %}
         <div class="col-xs-6 col-sm-6 col-md-6">
-          <img src="..." alt="..." class="img-rounded" style="width: 140px; height: 140px;">
+          <img src="{{ village_i.cover_pic_src }}" alt="..." class="img-rounded" style="width: 140px; height: 140px;">
           <h2>{{ village_i.id }} {{ village_i.name_cn }}</h2>
           <p style="height: 7em; overflow-y: hidden">{{ village_i.desc|safe }}</p>
           <p><a class="btn btn-default" href="#" role="button">View details »</a></p>

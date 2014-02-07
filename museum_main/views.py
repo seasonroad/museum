@@ -12,6 +12,13 @@ from museum_main.models import *
 from museum_main.serialize import serialize
 
 
+@app.teardown_request
+def teardown_request(exception):
+    try:
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+
 
 @app.route('/')
 def hello_world():
@@ -24,7 +31,6 @@ def show_villages():
     return render_template('show_villages.html', villages=villages)
 
 
-
 @app.route('/jxgd/add_village', methods=['POST'])
 def add_village():
     if not session.get('logged_in'):
@@ -35,9 +41,6 @@ def add_village():
     new_village = Village(village_name, village_text)
     db.session.add(new_village)
 
-    # TODO
-    # Move commit() to other place
-    db.session.commit()
     flash('New village was successfully posted')
     return redirect(url_for('show_villages'))
 
