@@ -15,8 +15,8 @@
   <div class="row row-offcanvas row-offcanvas-right">
     <div class="col-xs-12 col-sm-9">
       <div class="jumbotron">
-        <h1>Hello, world!</h1>
-        <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
+        <h1>{{ village.name_cn }}</h1>
+        <p>{{ village.desc }}</p>
       </div>
       <div class="row">
       {% for village_i in villages %}
@@ -24,7 +24,7 @@
           <img src="{{ village_i.cover_pic_src }}" alt="..." class="img-rounded" style="width: 140px; height: 140px;">
           <h2>{{ village_i.id }} {{ village_i.name_cn }}</h2>
           <p style="height: 7em; overflow-y: hidden">{{ village_i.desc|safe }}</p>
-          <p><a class="btn btn-default" href="{{ config.BASE_URL }}jxgd/village/{{ village_i.id }}" role="button">View details »</a></p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
         </div>
       {% else %}
         <p>Unbelievable. No villages here so far</p>
@@ -49,17 +49,6 @@
 
   <hr>
 
-  {% if session.logged_in %}
-    <form action="{{ url_for('add_village') }}" method=post class=add-village>
-      <dl>
-        <dt>Village Name
-        <dd><input type=text size=30 name=village_name>
-        <dt>Describe:
-        <dd><textarea name=village_text rows=5 cols=40></textarea>
-        <dd><input type=submit value=Add>
-      </dl>
-    </form>
-  {% endif %}
 
   {% if session.logged_in %}
     <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
@@ -145,7 +134,7 @@
 {% } %}
 </script>
 <!-- The template to display files available for download -->
-    <script id="template-download" type="text/x-tmpl">
+<script id="template-download" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
         <td>

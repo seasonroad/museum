@@ -1,6 +1,6 @@
 import json
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+     render_template, flash, config
 from werkzeug import secure_filename
 import time
 import os
@@ -43,6 +43,15 @@ def add_village():
 
     flash('New village was successfully posted')
     return redirect(url_for('show_villages'))
+
+
+#=======================================================#
+#                     Village Page                      #
+#=======================================================#
+@app.route('/jxgd/village/<int:village_id>', methods=['GET'])
+def show_village(village_id):
+    village = db.session.query(Village).get(village_id)
+    return render_template('villages/village.html', village=village)
 
 
 @app.route('/jxgd/upload_list', methods=['POST', 'GET'])
