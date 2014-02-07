@@ -28,10 +28,10 @@ def serialize(instance):
     """
     obj = instance
     d= {
-        'url': obj.file_path_ori,
+        'url': obj.url,
         'name': order_name(obj.name),
         'type': mimetypes.guess_type(obj.file_path_ori)[0] or 'image/png',
-        'thumbnailUrl': obj.file_path_thumb,
+        'thumbnailUrl': obj.thumb_url,
         'size': obj.size,
         #'deleteUrl': reverse('upload-delete', args=[instance.pk]),
         'deleteUrl': url_for('picture_delete', values=obj.id),

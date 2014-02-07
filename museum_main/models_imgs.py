@@ -47,6 +47,19 @@ class BuildingImg(db.Model):
         else:
             return 0
 
+    @property
+    def url(self):
+        if self.file_path_ori:
+            return app.config['BASE_URL'] +\
+                os.path.relpath(self.file_path_ori, app.config['STATIC_PRE'])
+
+    @property
+    def thumb_url(self):
+        if self.file_path_thumb:
+            return app.config['BASE_URL'] +\
+                os.path.relpath(self.file_path_thumb, app.config['STATIC_PRE'])
+
+
 class PlantImg(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(128))

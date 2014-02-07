@@ -1,4 +1,4 @@
-from museum_main import db
+from museum_main import app, db
 
 
 class Village(db.Model):

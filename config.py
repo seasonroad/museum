@@ -2,6 +2,10 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+BASE_URL = 'http://127.0.0.1:5000/'
+
+BASE_DIR = basedir
+STATIC_PRE = os.path.join(basedir, 'museum_main')
 PIC_DIR = os.path.join(basedir, 'museum_main/static/img/pictures')
 PIC_THUMB_DIR = os.path.join(PIC_DIR, 'thumb')
 
