@@ -20,11 +20,25 @@
       </div>
       <div class="row">
       {% for pic_i in village.images %}
-        <div class="col-xs-6 col-sm-6 col-md-6">
-          <img src="{{ pic_i.url }}" alt="..." class="img-rounded" style="max-height:300px; max-width:300px;">
-          <h2>{{ pic_i.name }}</h2>
-          <p style="height: 7em; overflow-y: hidden">{{ pic_i.desc|safe }}</p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <img src="{{ pic_i.url }}" alt="..." class="img-rounded" style="max-height:450px; max-width:450px;">
+            <p></p>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse"  class="collapsed" data-target="#collapse_{{ pic_i.id }}">
+                {{ pic_i.name }}
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse_{{ pic_i.id }}" class="panel-collapse collapse" style="height: 0px; ">
+                <div class="panel-body">
+                    Here is PIC desc details
+                  <hr>
+                  <a class="btn btn-default" href="#" role="button">Edit »</a>
+                </div>
+              </div>
+            </div>
         </div>
       {% else %}
         <p>Unbelievable. No villages here so far</p>
@@ -215,4 +229,7 @@
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 
+<script>
+
+</script>
 {% endblock %}
