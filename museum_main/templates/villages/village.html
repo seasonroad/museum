@@ -19,11 +19,11 @@
         <p>{{ village.desc }}</p>
       </div>
       <div class="row">
-      {% for village_i in villages %}
+      {% for pic_i in village.images %}
         <div class="col-xs-6 col-sm-6 col-md-6">
-          <img src="{{ village_i.cover_pic_src }}" alt="..." class="img-rounded" style="width: 140px; height: 140px;">
-          <h2>{{ village_i.id }} {{ village_i.name_cn }}</h2>
-          <p style="height: 7em; overflow-y: hidden">{{ village_i.desc|safe }}</p>
+          <img src="{{ pic_i.url }}" alt="..." class="img-rounded" style="max-height:300px; max-width:300px;">
+          <h2>{{ pic_i.name }}</h2>
+          <p style="height: 7em; overflow-y: hidden">{{ pic_i.desc|safe }}</p>
           <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
         </div>
       {% else %}
