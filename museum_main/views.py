@@ -55,7 +55,9 @@ def add_village():
 @app.route('/jxgd/village/<int:village_id>', methods=['GET'])
 def show_village(village_id):
     village = db.session.query(Village).get(village_id)
-    return render_template('villages/village.html', village=village)
+    villages = db.session.query(Village).all()
+    print villages
+    return render_template('villages/village.html', village=village, villages=villages)
 
 
 @app.route('/jxgd/upload_list', methods=['POST', 'GET'])

@@ -49,18 +49,15 @@
       </div>
     </div>
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-          </div>
+      <div class="list-group">
+        {% for v_i in villages %}
+          {% if v_i.id == village.id %}
+            <a href="{{ config.BASE_URL }}jxgd/village/{{ v_i.id }}" class="list-group-item active">{{ v_i.name_cn }}</a>
+          {% else %}
+            <a href="{{ config.BASE_URL }}jxgd/village/{{ v_i.id }}" class="list-group-item">{{ v_i.name_cn }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 
