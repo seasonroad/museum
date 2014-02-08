@@ -19,6 +19,10 @@ def teardown_request(exception):
     except Exception:
         db.session.rollback()
 
+@app.route('/test/')
+def test():
+    return render_template('test.html')
+
 
 @app.route('/')
 def hello_world():
