@@ -21,6 +21,7 @@
       <div class="row">
       {% for pic_i in village.images %}
         <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="thumbnail">
           <img src="{{ pic_i.url }}" alt="..." class="img-rounded" style="max-height:450px; max-width:450px;">
             <p></p>
             <div class="panel-group" id="accordion_{{ pic_i.id }}">
@@ -42,6 +43,7 @@
               </div>
             </div>
           <p> </p>
+          </div>
         </div>
       {% else %}
         <p>Unbelievable. No villages here so far</p>
@@ -112,16 +114,19 @@
 
 {% block html %}
 
-{% raw %}
+
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
+{% raw %}
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td>
             <span class="preview"></span>
         </td>
-        <td class="title"><label>ID: <input name="village_id" required></label></td>
-        <td class="title"><label>Locate: <input name="locate" required></label></td>
+{% endraw %}
+        <td class="title"><input class="hide" name="village_id" required value="{{ village.id }}"></td>
+{% raw %}
+        <td class="title"><label>Locate: </label><textarea class="form-control" name="locate" required></textarea></td>
         <td>
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>
@@ -146,9 +151,11 @@
         </td>
     </tr>
 {% } %}
+{% endraw %}
 </script>
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
+{% raw %}
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
         <td>
@@ -189,8 +196,8 @@
         </td>
     </tr>
 {% } %}
-</script>
 {% endraw %}
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -229,7 +236,4 @@
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 
-<script>
-
-</script>
 {% endblock %}
