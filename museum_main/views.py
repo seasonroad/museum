@@ -21,7 +21,7 @@ def teardown_request(exception):
 
 @app.route('/test/')
 def test():
-    return render_template('test.html')
+    return render_template('test-popup.html')
 
 
 @app.route('/')

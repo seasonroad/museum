@@ -31,12 +31,16 @@ $(function () {
     );
 
     $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+//        var inputs_sec = data.context.find(':textarea');
+//    alert(JSON.stringify(inputs_sec));
     var inputs = data.context.find(':input');
+//    alert(JSON.stringify(inputs));
 
     if (inputs.filter('[required][value=""]').first().focus().length) {
         return false;
     }
     data.formData = inputs.serializeArray();
+//    alert(JSON.stringify(data.formData))
     });
 
     if (window.location.hostname === 'blueimp.github.io') {
