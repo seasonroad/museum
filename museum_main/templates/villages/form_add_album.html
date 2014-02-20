@@ -1,14 +1,10 @@
-  <form class="form-horizontal">
+  <form class="form-horizontal" id="add_album_form">
     <fieldset>
-      <div id="legend" class="">
-        <legend class="">Create Album</legend>
-      </div>
-
     <div class="control-group">
           <!-- Text input-->
           <label class="control-label" for="input01">Album Name</label>
           <div class="controls">
-            <input type="text" placeholder="" class="input-xlarge">
+            <input type="text" placeholder="" name="new_album_name" class="input-xlarge" id="new_album_name">
             <p class="help-block"></p>
           </div>
         </div>
@@ -19,7 +15,7 @@
           <label class="control-label">Album Describe</label>
           <div class="controls">
             <div class="textarea">
-                  <textarea type="" class=""> </textarea>
+                  <textarea type="" class="" name="new_album_dec" id="new_album_dec"> </textarea>
             </div>
           </div>
         </div>
@@ -29,7 +25,7 @@
           <!-- Select Basic -->
           <label class="control-label">Select Category</label>
           <div class="controls">
-            <select class="input-xlarge">
+            <select class="input-xlarge" name="new_album_category">
       <option>temple</option>
       <option>tomp</option></select>
           </div>

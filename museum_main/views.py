@@ -19,9 +19,10 @@ def teardown_request(exception):
     except Exception:
         db.session.rollback()
 
-@app.route('/test/')
+@app.route('/test', methods=['POST'])
 def test():
-    return render_template('test-popup.html')
+    print request.form
+    return 'ookk'
 
 
 @app.route('/')
@@ -58,6 +59,18 @@ def show_village(village_id):
     villages = db.session.query(Village).all()
     print villages
     return render_template('villages/village.html', village=village, villages=villages)
+
+
+@app.route('/jxgd/village/<int:village_id>/gen_add_album', methods=['GET'])
+def gen_add_album(village_id):
+    print "YangHaibo: in add_album_for_village"
+    return render_template('villages/form_add_album.html')
+
+
+@app.route('/jxgd/village/<int:village_id>/add_album', methods=['POST'])
+def village_add_album(village_id):
+    print request.form
+    return 'yanghaibo'
 
 
 @app.route('/jxgd/upload_list', methods=['POST', 'GET'])

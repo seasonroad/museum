@@ -233,9 +233,7 @@
 {% endraw %}
 </script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="{{ url_for('static', filename='js/bootbox/bootbox.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootbox/bootbox.min.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/file_upload/vendor/jquery.ui.widget.js') }}"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
@@ -272,11 +270,40 @@
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 <script>
-  $(function(){
-      alert(0);
-      $("#new_album").click(function(){
-         bootbox.
-      });
-  });
+    $(function () {
+        $("#new_album").click(function () {
+            $.get("{{ config.BASE_URL }}jxgd/village/{{ village.id }}/gen_add_album", function (data) {
+                bootbox.dialog({
+                    message: data,
+                    title: "Add Album",
+                    buttons: {
+                        Save: {
+                            label: "Save",
+                            className: "btn-success",
+                            callback: function () {
+                                //alert(JSON.stringify($('#add_album_form')));
+                                $.ajax({
+                                    url: '/jxgd/village/{{ village.id }}/add_album',
+                                    data: $('#add_album_form').serialize(),
+                                    type: "post",
+                                    cache: false,
+                                    success: function (data) {
+                                        alert(data);
+                                    }
+                                });
+                            }
+                        },
+                        cancel: {
+                            label: "Cancel",
+                            className: "btn-danger",
+                            callback: function () {
+                                alert('cancel')
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    });
 </script>
 {% endblock %}
